@@ -42,5 +42,6 @@ def convert_google_future_to_concurrent_future(
     setattr(future, '_state', property(_state))
     setattr(future, '_done_callbacks',
             future._callbacks)  # pylint: disable=protected-access
+    setattr(future.__class__, '_asyncio_future_blocking', True)
 
     loop.create_task(await_on_interval(1))
